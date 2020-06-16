@@ -43,10 +43,12 @@ legend {
 						    var elm = document.getElementById('select_year'),
 						        df = document.createDocumentFragment();
 						    for (var i = (new Date().getFullYear())-10; i <= (new Date().getFullYear())+10; i++) {
-						        var option = document.createElement('option');
-						        option.value = i + "_" + (i+1);
-						        option.appendChild(document.createTextNode(i+" _ "+(i+1)));
-						        df.appendChild(option);
+						    	for(var j=1;j<=2;j++){
+							        var option = document.createElement('option');
+							        option.value = i + "_" + (i+1)+"_sem"+j;
+							        option.appendChild(document.createTextNode(i+" _ "+(i+1)+"_sem"+j));
+							        df.appendChild(option);
+						    	}
 						    }
 						    elm.appendChild(df);
 						}());
