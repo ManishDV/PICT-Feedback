@@ -11,10 +11,11 @@
 String oid=request.getParameter("oid");
 String name=request.getParameter("name");
 String dept=request.getParameter("dept");
+String db_name = (String)session.getAttribute("curdb");
 try{
 Connection conn = null;
 Class.forName("com.mysql.jdbc.Driver").newInstance();
-conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/feedback_main","Deva", "dev123456");
+conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db_name,"Deva", "dev123456");
 Statement st=null;
 st=conn.createStatement();
 st.executeUpdate("update teachers set name='"+name+"',dept='"+dept+"' where id="+oid+"");
