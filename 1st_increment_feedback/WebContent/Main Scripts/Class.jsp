@@ -105,7 +105,7 @@ catch(SQLException e)
 						sammdao obj = new sammdao();
 						
 						String[] arr = (String[]) request.getParameterValues("selected");
-						obj.classdel(arr);
+						obj.classdel(arr, database);
 					}
 				if(request.getParameter("error")!=null)
 				{

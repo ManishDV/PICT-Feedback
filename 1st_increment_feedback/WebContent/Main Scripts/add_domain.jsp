@@ -24,16 +24,17 @@
         <form action="#" method=post>
 			<input type="submit" name="delete" value="Delete"/>
 				<%
+					String curdb = (String)session.getAttribute("curdb");
+				
 					if (request.getParameter("delete") != null) {
 						sammdao obj = new sammdao();
 						
 						String[] arr = (String[]) request.getParameterValues("selected");
-						obj.domaindel(arr);
+						obj.domaindel(arr, curdb);
 					}
 				
 		            String nm = request.getParameter("name");
 		            String b_add = request.getParameter("add_but");
-		            String curdb = (String)session.getAttribute("curdb");
 		            System.out.println("in add_domain : "+curdb);
 		          
 		                Class.forName("com.mysql.jdbc.Driver");

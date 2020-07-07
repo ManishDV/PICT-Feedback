@@ -11,12 +11,12 @@
 String oname =request.getParameter("oname");
 
 String name=request.getParameter("name");
-
+String db_name = (String) session.getAttribute("curdb");
 
 try{
 Connection conn = null;
 Class.forName("com.mysql.jdbc.Driver").newInstance();
-conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/feedback_main","Deva", "dev123456");
+conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db_name,"Deva", "dev123456");
 Statement st=null;
 st=conn.createStatement();
 st.executeUpdate("update template set temp_name='"+name+"'where temp_name='"+oname+"';");

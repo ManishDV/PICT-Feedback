@@ -149,7 +149,7 @@
      	{
 			sammdao obj=new sammdao();
 			String[] arr=(String[])request.getParameterValues("selected");
-			obj.teachtempdel(arr);
+			obj.teachtempdel(arr, database);
      	}
      	%>
 <div class="table-responsive">

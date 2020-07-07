@@ -14,13 +14,13 @@ String option1=request.getParameter("op1");
 String option2=request.getParameter("op2");
 String option3=request.getParameter("op3");
 String option4=request.getParameter("op4");
-
+String db_name = (String)session.getAttribute("curdb");
 
 
 try{
 Connection conn = null;
 Class.forName("com.mysql.jdbc.Driver").newInstance();
-conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/feedback_main","Deva", "dev123456");
+conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db_name,"Deva", "dev123456");
 Statement st=null;
 st=conn.createStatement();
 st.executeUpdate("update question set question='"+question+"',option1='"+option1+"',option2='"+option2+"',option3='"+option3+"',option4='"+option4+"' where qid="+oqid+";");

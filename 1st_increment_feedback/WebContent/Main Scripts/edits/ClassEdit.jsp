@@ -13,11 +13,11 @@ String year=request.getParameter("year");
 String ran1=request.getParameter("ran1");
 String ran2=request.getParameter("ran2");
 String dept=request.getParameter("dept");
-
+String db_name = (String)session.getAttribute("curdb");
 try{
 	Connection conn = null;
 	Class.forName("com.mysql.jdbc.Driver").newInstance();
-	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/feedback_main","Deva", "dev123456");
+	conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db_name,"Deva", "dev123456");
 	Statement st=null;
 	st=conn.createStatement();
 	st.executeUpdate("update class set year='"+year+"',dept='"+dept+"',division="+div+",ran1="+ran1+",ran2="+ran2+" where division="+odiv+" and year ='"+ oyear +"';");

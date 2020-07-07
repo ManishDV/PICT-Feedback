@@ -82,7 +82,7 @@
 						sammdao obj = new sammdao();
 						
 						String[] arr = (String[]) request.getParameterValues("selected");
-						obj.dell(arr);
+						obj.dell(arr, database);
 					}
 		if(request.getParameter("error")!=null)
 		{

@@ -127,7 +127,8 @@
 				sammdao obj = new sammdao();
 				
 				String[] arr = (String[]) request.getParameterValues("selected");
-				obj.questiondel(arr);
+				//String curdb = (String) session.getAttribute("curdb");
+				obj.questiondel(arr, database);
 			}
 		%>
 

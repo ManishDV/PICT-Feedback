@@ -6,14 +6,14 @@ import java.sql.*;
 public class sammdao 
 	{
 		
-		public void dell(String[] arr)
+		public void dell(String[] arr,String db_name)
 		{
 			
 			
 			try
 			{
 				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/feedback_main","Deva","dev123456");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db_name,"Deva","dev123456");
 				Statement st = con.createStatement();
 				for(int i=0;i<arr.length;i++)
 				st.executeUpdate("delete from teachers where id="+arr[i]+";");
@@ -24,14 +24,14 @@ public class sammdao
 			}
 			
 		}
-		public void classdel(String[] arr)
+		public void classdel(String[] arr, String db_name)
 		{
 			
 			
 			try
 			{
 				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/feedback_main","Deva","dev123456");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db_name,"Deva","dev123456");
 				Statement st = con.createStatement();
 				for(int i=0;i<arr.length;i++)
 				{
@@ -45,14 +45,14 @@ public class sammdao
 			}
 			
 		}
-		public void domaindel(String[] arr)
+		public void domaindel(String[] arr, String db_name)
 		{
 			
 			
 			try
 			{
 				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/feedback_main","Deva","dev123456");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db_name,"Deva","dev123456");
 				Statement st = con.createStatement();
 				for(int i=0;i<arr.length;i++)
 				st.executeUpdate("delete from domain where domain_name='"+arr[i]+"';");
@@ -63,14 +63,14 @@ public class sammdao
 			}
 			
 		}
-		public void questiondel(String[] arr)
+		public void questiondel(String[] arr, String db_name)
 		{
 			
 			
 			try
 			{
 				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/feedback_main","Deva","dev123456");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db_name,"Deva","dev123456");
 				Statement st = con.createStatement();
 				for(int i=0;i<arr.length;i++)
 				st.executeUpdate("delete from question where qid="+arr[i]+";");
@@ -81,14 +81,14 @@ public class sammdao
 			}
 			
 		}
-		public void subjectdel(String[] arr)
+		public void subjectdel(String[] arr, String db_name)
 		{
 			
 			
 			try
 			{
 				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/feedback_main","Deva","dev123456");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db_name,"Deva","dev123456");
 				Statement st = con.createStatement();
 				for(int i=0;i<arr.length;i++)
 				{
@@ -103,14 +103,14 @@ public class sammdao
 			}
 			
 		}
-		public void templatedel(String[] arr)
+		public void templatedel(String[] arr, String db_name)
 		{
 			
 			
 			try
 			{
 				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/feedback_main","Deva","dev123456");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db_name,"Deva","dev123456");
 				Statement st = con.createStatement();
 				for(int i=0;i<arr.length;i++)
 	
@@ -122,14 +122,14 @@ public class sammdao
 			}
 			
 		}
-		public void teachtempdel(String[] arr)
+		public void teachtempdel(String[] arr, String db_name)
 		{
 			
 			
 			try
 			{
 				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/feedback_main","Deva","dev123456");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db_name,"Deva","dev123456");
 				Statement st = con.createStatement();
 				for(int i=0;i<arr.length;i++)
 				{
@@ -144,14 +144,14 @@ public class sammdao
 			
 		}
 		
-		public void tcsdel(String[] arr)
+		public void tcsdel(String[] arr, String db_name)
 		{
 			
 			
 			try
 			{
 				Class.forName("com.mysql.jdbc.Driver");
-				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/feedback_main","Deva","dev123456");
+				Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+db_name,"Deva","dev123456");
 				Statement st = con.createStatement();
 				for(int i=0;i<arr.length;i++)
 				{

@@ -57,7 +57,7 @@
 						sammdao obj = new sammdao();
 						
 						String[] arr = (String[]) request.getParameterValues("selected");
-						obj.templatedel(arr);
+						obj.templatedel(arr, database);
 					}
 		%>
 	<div class="table-responsive">

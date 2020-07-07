@@ -155,7 +155,7 @@ try{
 		{
 			sammdao obj=new sammdao();
 			String[] arr=(String[])request.getParameterValues("selected");
-			obj.tcsdel(arr);
+			obj.tcsdel(arr, database);
 		}
 
 %>
