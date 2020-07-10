@@ -282,6 +282,30 @@
 	//String query74 = "INSERT INTO template VALUES ('CTL'),('LTL');";
 	
 	String query75 = "UNLOCK TABLES;";
+	
+	String trig1 = "DELIMITER ;; "+
+			"CREATE TRIGGER 'c_stud' "+ 
+			"AFTER INSERT ON 'class' "+
+			"FOR EACH ROW "+ 
+			"begin declare r1 int; "+ 
+			"declare r2 int; "+ 
+			"set r1 = new.ran1; "+ 
+			"set r2 = new.ran2; "+ 
+			"while r1<= r2 do "+ 
+			"insert into student(rollno,year,division) values(r1,new.year,new.division); "+ 
+			"set r1 = r1 + 1; "+ 
+			"end while; "+ 
+			"end ;; "+
+			"DELIMITER ;";
+	
+	String trig2 = "DELIMITER ;; "+
+			"CREATE TRIGGER 'class_BEFORE_DELETE' "+ 
+			"BEFORE DELETE ON 'class' "+ 
+			"FOR EACH ROW "+ 
+			"BEGIN "+
+			 "delete from student where year=old.year and division=old.division; "+
+			"END ;; "+
+			"DELIMITER ;";
 						
 	try {
 		Class.forName("com.mysql.jdbc.Driver").newInstance();
@@ -433,6 +457,13 @@ if (request.getParameter("select_year") != null) {
 			result3 = statement3.executeUpdate(query68);
 			//result3 = statement3.executeUpdate(query69);
 			result3 = statement3.executeUpdate(query70);
+			
+			//System.out.print("Executed db statements\nExecuting triggers now\n");
+			
+			//result3 = statement3.executeUpdate(trig1);
+			//result3 = statement3.executeUpdate(trig2);
+			
+			//System.out.println("Triggers executed successfully");
 			
 			out.println("result of 'CREATE DATABASE '" + database + " is " + result);
 			databaseListChanged = true;
