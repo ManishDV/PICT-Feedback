@@ -138,7 +138,7 @@ try{
 
       </select>
       <br>
-      <input type="submit" name="gr" value="View Report"/>
+      <input type="submit" class="btn" name="gr" value="View Report"/>
 </form>
 
 <%@ include file="downbar.jsp" %>

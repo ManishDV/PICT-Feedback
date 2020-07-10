@@ -21,27 +21,22 @@
 			 filename = $("#file").val();
 				
 			 if(filename.trim().length == 0){
-				 alert('Please Select The File To Upload Teachers Data');
+				 alert('Please Select The File To Upload Subject Data');
 				 return false;
 			 }else{
+				document.getElementById("add1").disabled = true;
+
+				document.getElementById("add2").disabled = true;
+				document.getElementById("del").disabled = true;
 				return true;	 
 			 }
 			
 		}
 </script>
 <%@ include file = "navbar.jsp" %>
+<div class="row">
 
-<div style="margin-left: 50%">
-	<form action="subject_upload.jsp" enctype="multipart/form-data"
-		method="post">
-
-		<input name="upload" id="file" type="file" accept=".xls, .xlsx">
-		<br>
-		<br>
-		<button type="submit" onclick="return check()">ADD</button>
-
-	</form>
-</div>
+<div class="col">
         <form action="subject.jsp" method="POST">
             Subject ID : <input type="number" id="subid" name="subjectID" placeholder="Enter the Subject ID" min="1"><br>
             Subject Name : <input type="text" id="subname" name="subject" placeholder="Enter the Subject Name" pattern='[A-Z\_a-z\\s]*'><br>
@@ -88,7 +83,7 @@
        </select>  
        <br>
              <br>
-    <input type="submit" value="ADD" name="addclick">
+    <input type="submit" value="ADD" id="add1" class="btn" name="addclick">
     </form>
     <%  
     String addbtn = request.getParameter("addclick");
@@ -124,9 +119,24 @@
 	        }
 	    }
     %>
+    </div>
+    <div class="col" style="border-left: 1px; border-left-color: black">
+    <div class="center">
     
+	<form action="subject_upload.jsp" enctype="multipart/form-data"
+		method="post">
+		<h3>Choose Excel Sheet</h3>
+		<input name="upload" id="file" class="form-control" type="file" accept=".xls, .xlsx">
+		<br>
+		<br>
+		<button type="submit" onclick="return check()" id="add2" class="btn">ADD</button>
+
+	</form>
+	</div>
+</div>
+    </div>
     <form action="#" method=post>
-		<input type="submit" name="delete" value="Delete"/>
+		<input class="btn" type="submit" id="del" name="delete" value="Delete"/>
 			<%
 				if (request.getParameter("delete") != null) {
 					sammdao obj = new sammdao();

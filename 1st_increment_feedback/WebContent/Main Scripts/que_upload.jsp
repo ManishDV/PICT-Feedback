@@ -19,10 +19,10 @@
 </head>
 <body>
 	<%
-		String path = "/home/neo/eclipse-workspace/1st_increment_feedback/WebContent/data";
+		String path = "data/";
 		MultipartRequest mr = new MultipartRequest(request, path);
 		//storing the path of the uploaded file
-
+		System.out.println("In upload");
 		String filepath = mr.getFile("upload").toString();
 		File f = new File(filepath);
 		String temp_name = (String)session.getAttribute("tempID");
@@ -49,20 +49,7 @@
 			Iterator<Row> rowIterator = spreadsheet.iterator();
 			String[] names = new String[6];
 			int j = 0;
-			int maxid;
-			String sql = "select max(qid) as mqid from question";
-			ResultSet resultSet1 = st1.executeQuery(sql);
-			if(resultSet1.next()){
-				String temp = resultSet1.getString("mqid");
-				if(temp != null)
-					maxid = Integer.parseInt(temp);
-				else
-					maxid = 0;
-			}
-			else
-				maxid = 0;
-			System.out.println("MAX: "+maxid);
-		
+			
 			while (rowIterator.hasNext()) {
 				if(flag == 0){
 					row = (XSSFRow) rowIterator.next(); //for skipping Header Row	
@@ -74,45 +61,55 @@
 				j =0 ;
 				while (cellIterator.hasNext()) {
 					Cell cell = cellIterator.next();
-					switch (cell.getCellType()) {
-					case NUMERIC:
-						n = (int) cell.getNumericCellValue();
-						System.out.println(n);
-						break;
-
-					case STRING:
-						names[j] = cell.getStringCellValue();
-						j++;
-						break;
-					}
-
-					}
+					names[j] = cell.getStringCellValue();
+					j++;
+					
+				}
+				int maxid;
+				String sql = "select max(qid) as mqid from question";
+				ResultSet resultSet1 = st1.executeQuery(sql);
+				if(resultSet1.next()){
+					String temp = resultSet1.getString("mqid");
+					if(temp != null)
+						maxid = Integer.parseInt(temp);
+					else
+						maxid = 0;
+				}
+				else
+					maxid = 0;
+				
+			
 					//System.out.println(names[j]);
 					
 						
-					String queryString = "INSERT INTO question(qid,question,option1,option2,option3,option4) VALUES (?,?,?,?,?,?)";
+					String queryString = "INSERT INTO question(qid,question,option1,option2,option3,option4,option5) VALUES (?,?,?,?,?,?,?)";
 					pstatement = con.prepareStatement(queryString);
 					
-					pstatement.setInt(1, n+maxid);
+					pstatement.setInt(1, (maxid+1));
 					pstatement.setString(2, names[0]);
 					pstatement.setString(3, names[1]);
 					pstatement.setString(4, names[2]);
 					pstatement.setString(5, names[3]);
 					pstatement.setString(6, names[4]);
+					pstatement.setString(7, names[5]);
 					
 					updateQuery = pstatement.executeUpdate();
 
 					Statement stmt = con.createStatement();
-					int m = stmt.executeUpdate("insert into temp_ques values('"+temp_name+"',"+(n+maxid)+")");
-			}
+					int m = stmt.executeUpdate("insert into temp_ques values('"+temp_name+"',"+(maxid+1)+")");
+				}
 			
 
 			if (f.delete()) {
-						response.sendRedirect("addquestion.jsp");
+				System.out.println("Questions Added");
+				session.setAttribute("tempID",temp_name);
+				response.sendRedirect("addquestion.jsp");
 			}
-			
+
+			session.setAttribute("tempID",temp_name);
+			response.sendRedirect("addquestion.jsp");
 		} catch (Exception e) {
-			//out.println(e.getMessage());
+			System.out.println(e.getMessage());
 			response.sendRedirect("addquestion.jsp");
 		}
 	%>

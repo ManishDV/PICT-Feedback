@@ -125,7 +125,7 @@ try{
 %>
 
       </select>
-      <input type="submit" name="add" value="Add"/>
+      <input type="submit" class="btn" name="add" value="Add"/>
      </form>
 <%
 try{
@@ -149,7 +149,7 @@ try{
 %>
 
 <form action="#" method=post>
-<input type="submit" name="delete" value="delete">
+<input type="submit" class="btn" name="delete" value="delete">
 <%
 		if(request.getParameter("delete")!=null)
 		{
