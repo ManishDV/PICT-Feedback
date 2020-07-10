@@ -41,9 +41,20 @@ try{
     Statement st = con.createStatement();
     Statement st2 = con.createStatement();
     int total_stud=0;
-    String SQL = "{call initfeed()}";
-    cstmt = con.prepareCall (SQL);
-    cstmt.executeQuery();
+    //String SQL = "{call initfeed()}";
+    //cstmt = con.prepareCall (SQL);
+    //cstmt.executeQuery();
+    
+    String q1 = "DELETE from feedback;";
+    String q2 = "insert into feedback(cat_id,qid) SELECT cat_id,qid from teacher_class_subject join teacher_subject_template on teacher_class_subject.tid=teacher_subject_template.tid and teacher_subject_template.sid=teacher_class_subject.sid join temp_ques on teacher_subject_template.temp_id=temp_ques.temp_id;";
+    String q3 = "update feedback set score=0;";
+    
+    System.out.print("Executing initfeed\n");
+    int result = -1;
+    result = st.executeUpdate(q1);
+    result = st.executeUpdate(q1);
+    result = st.executeUpdate(q1);
+    System.out.print("Initfeed executed successfully\n");
     
     String Capital_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 
     String Small_chars = "abcdefghijklmnopqrstuvwxyz"; 
