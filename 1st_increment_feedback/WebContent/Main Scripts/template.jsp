@@ -44,14 +44,15 @@
 		<br>
 		<input name="temp_name" type="text" />
 		<br>
-		<input type="submit" name="single" value="Search template"/>
+		<input type="submit" class="btn" name="single" value="Search template"/>
 		<input type="hidden" name="error" value="" />
 		<br>
-		<input type="submit" name="add" value="Add"/>
+		<br>
+		<input type="submit" class="btn" name="add" value="Add"/>
 	</form>
 	<br>
 	<form action="#" method=post>
-		<input type="submit" name="delete" value="Delete"/>
+		<input type="submit" class="btn" name="delete" value="Delete"/>
 		<%
 					if(set == 4){
 						sammdao obj = new sammdao();
@@ -127,7 +128,7 @@
 	    		<tr>
 	    			<td><input type="checkbox" name="selected" value='<%=resultSet.getString("temp_name") %>'/></td>
 		    		<td><input type="text" disabled="true" id="<%=resultSet.getString("temp_name") %>" value="<%=resultSet.getString("temp_name") %>"/></td>
-		    		<td><input type="button" onclick="fun1(this,'<%=resultSet.getString("temp_name") %>')" value="EDIT"/></td>
+		    		<td><input type="button" class="btn" onclick="fun1(this,'<%=resultSet.getString("temp_name") %>')" value="EDIT"/></td>
 		    	</tr>
 	<%
 	    				}

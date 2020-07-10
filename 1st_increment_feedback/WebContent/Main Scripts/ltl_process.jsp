@@ -2,31 +2,25 @@
 <%@page import="java.sql.*,javax.sql.*"%>
 
 <%
-		String error = "";
-		try{
-	        Class.forName("com.mysql.jdbc.Driver");
-			String database = (String)session.getAttribute("curdb");
-	        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+database, "Deva", "dev123456");
-	        Statement st=conn.createStatement();
-	        String div =(String)session.getAttribute("division");
-	        String year =(String)session.getAttribute("year");
-	       
-	        String[] selectedChecks = request.getParameterValues("ltl_check");
-	        
-	        System.out.println(selectedChecks);
-	        for(int i = 0; i < selectedChecks.length ;i++){
-	        	String[] arrOfval = selectedChecks[i].split("_",4);
-	        	if(arrOfval == null)
-	        		continue;
-	        	for(int j = Integer.parseInt(arrOfval[0]);j<Integer.parseInt(arrOfval[1]);j++){
-	        			st.executeUpdate("INSERT INTO `student_cat` (`rollno`, `tid`, `sid`) VALUES("+j+","+arrOfval[2]+","+arrOfval[3]+")");
-	        	}
-	        }
-		}
-		catch(Exception e){
-			System.out.println(e);
-			error="ERROR! Request cannot be fulfilled";
-		}
+        Class.forName("com.mysql.jdbc.Driver");
+		String database = (String)session.getAttribute("curdb");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+database, "Deva", "dev123456");
+        Statement st=conn.createStatement();
+        String div =(String)session.getAttribute("division");
+        String year =(String)session.getAttribute("year");
+       
+        String[] selectedChecks = request.getParameterValues("ltl_check");
+        
+        System.out.println(selectedChecks);
+        for(int i = 0; i < selectedChecks.length ;i++){
+        	String[] arrOfval = selectedChecks[i].split("_",4);
+        	if(arrOfval == null)
+        		continue;
+        	for(int j = Integer.parseInt(arrOfval[0]);j<Integer.parseInt(arrOfval[1]);j++){
+        			st.executeUpdate("INSERT INTO `student_cat` (`rollno`, `tid`, `sid`) VALUES("+j+","+arrOfval[2]+","+arrOfval[3]+")");
+        	}
+        }
+        
         /* ResultSet rs = st.executeQuery("select * from student where year='"+year+"' and division='"+div+"'");
         
         int klim=0,jlim=0;
@@ -62,5 +56,5 @@
 %>
 
 <% 
-		response.sendRedirect("ltl_map.jsp?error="+error);
+		response.sendRedirect("ltl_map.jsp");
 %>

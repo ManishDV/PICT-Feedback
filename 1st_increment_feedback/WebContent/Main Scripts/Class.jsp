@@ -36,7 +36,7 @@
 
 </select><br><br></center>
 <center><label>RANGE :&nbsp;</label><input id="range1" type="number" placeholder="RANGE OF STUDENTS" name="ran1" min="1"></input>&nbsp;TO <input id="range2" type="number" placeholder="RANGE OF STUDENTS" name="ran2" min="1"></input><br><br></center>
-<center><input type="submit" name="ADD1" value="ADD"></input></center>
+<center><input type="submit" class="btn" name="ADD1" value="ADD"></input></center>
 
 </form>
 
@@ -99,7 +99,7 @@ catch(SQLException e)
 <br><br>
 <center>
 <form action="#" method=post>
-			<input type="submit" name="delete" value="Delete"/>
+			<input type="submit" class="btn" name="delete" value="Delete"/>
 				<%
 					if (request.getParameter("delete") != null) {
 						sammdao obj = new sammdao();
@@ -142,7 +142,7 @@ while(rs2.next())
   		<td><input style="width:70px;" type="text" disabled="true" id="<%=i+rs2.getString(3)%>" value="<%=rs2.getString(3)%>"/></td>
   		<td><input style="width:80px;" type="text" disabled="true" id="<%=i+rs2.getString(4)%>" value="<%=rs2.getString(4)%>"/></td>
   		<td><input style="width:90px;" type="text" disabled="true" id="<%=i+rs2.getString(5)%>" value="<%=rs2.getString(5)%>"/></td>
-  		<td><input style="width:90px;" type="button" onclick="fun1(this,'<%=i+rs2.getString(1)%>','<%=i+rs2.getString(2)%>','<%=i+rs2.getString(3)%>','<%=i+rs2.getString(4)%>','<%=i+rs2.getString(5)%>')" value="EDIT"/></td>
+  		<td><input style="width:90px;" type="button"  class="btn" onclick="fun1(this,'<%=i+rs2.getString(1)%>','<%=i+rs2.getString(2)%>','<%=i+rs2.getString(3)%>','<%=i+rs2.getString(4)%>','<%=i+rs2.getString(5)%>')" value="EDIT"/></td>
   	</tr>
 <% 
 	i++;

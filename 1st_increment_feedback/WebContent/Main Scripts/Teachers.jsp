@@ -6,10 +6,33 @@
 
 <script>
 	var a = 4
+	
 	var title_name = "Teachers"
+
+
+		function check(){
+			 
+			 filename = $("#file").val();
+				
+			 if(filename.trim().length == 0){
+				 alert('Please Select The File To Upload Teachers Data');
+				 return false;
+			 }else{
+				document.getElementById("add1").disabled=true;
+
+				document.getElementById("add2").disabled=true;
+				document.getElementById("del").disabled=true;
+				return true;	 
+			 }
+			
+		}
+	
+
+	
 </script>
 <%@ include file = "navbar.jsp" %>
-
+<div class="row">
+<div class="col">
 <form name="form1" action="Teachers.jsp" method="post">
 <div>
 <div>
@@ -27,22 +50,23 @@
 		</select>
 <br>
 <br>
-<input type="submit" name="ADD1" value="ADD"></input>
-</div>
-<div style="float:right">
-<label>OR IMPORT FROM EXCEL SHEET</label><br>
-
+<input class="btn" type="submit" id="add1" name="ADD1" value="ADD"></input>
 </div>
 </div>
 </form>
+</div>
+<div class="col"> 
 <form action="staff_upload.jsp" enctype="multipart/form-data" method="post">
-
-	<input name="upload" id="file" type="file" accept=".xls, .xlsx" >
-	<br><br>
-	<button type="submit">ADD</button>
+<h3>Choose Excel Sheet</h3>
+		<input name="upload" id="file" class="form-control" type="file" accept=".xls, .xlsx">
+		<br>
+		<br>
+		<button type="submit" id="add2" onclick="return check()" class="btn">ADD</button>
 
 </form>
-
+</div>
+<h4 id="errorcode"></h4>
+</div>
 <%
 	String name=null;
 	String dept=null;
@@ -51,7 +75,7 @@
 	
 	Class.forName("com.mysql.jdbc.Driver");
 	String database = (String)session.getAttribute("curdb");
-	System.out.println("In teachers");
+	//System.out.println("In teachers");
 	Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+database,"Deva","dev123456");
 	name=request.getParameter("name");
 	dept=request.getParameter("dept");
@@ -76,7 +100,7 @@
 %>
 <br><br>
 	<form action="#" method=post>
-		<input type="submit" name="delete" value="Delete"/>
+		<input type="submit" id="del" name="delete" class="btn" value="Delete"/>
 		<%
 					if(request.getParameter("delete") != null){
 						sammdao obj = new sammdao();
@@ -115,7 +139,7 @@ while(rs2.next())
    		<td><input style="width:60px;" type="text" disabled="true" id="<%=i+rs2.getInt(1)%>" value="<%=i+rs2.getInt(1)%>"/></td>
    		<td><input style="width:70px;" type="text" disabled="true" id="<%=i+rs2.getString(2)%>" value="<%=rs2.getString(2)%>"/></td>
    		<td><input style="width:200px;" type="text" disabled="true" id="<%=i+rs2.getString(3)%>" value="<%=rs2.getString(3)%>"/></td>
-   		<td><input type="button" onclick="fun1(this,'<%=i+rs2.getInt(1)%>','<%=i+rs2.getString(2)%>','<%=i+rs2.getString(3)%>');" value="EDIT"/></td>
+   		<td><input type="button" class="btn" onclick="fun1(this,'<%=i+rs2.getInt(1)%>','<%=i+rs2.getString(2)%>','<%=i+rs2.getString(3)%>');" value="EDIT"/></td>
 	</tr>
 <% 
 }

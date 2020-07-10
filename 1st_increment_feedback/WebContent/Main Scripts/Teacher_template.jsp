@@ -140,10 +140,10 @@
 	    		}
 		%>
       	</select>
-      	<input type="submit" value="map"/>
+      	<input type="submit"  class="btn" value="map"/>
      </form>
      <form action="#" method=post>
-     <input type="submit" name="delete" value="delete">
+     <input type="submit" class="btn" name="delete" value="delete">
      <%
      	if(request.getParameter("delete")!=null)
      	{

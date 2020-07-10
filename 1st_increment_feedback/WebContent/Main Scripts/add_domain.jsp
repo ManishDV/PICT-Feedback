@@ -15,14 +15,14 @@
                     <td><input type="text" name="name" pattern='[A-Za-z\\s]*' /></td>
                 </tr>               
                 <tr>
-                    <td><input type="submit" name = "add_but" value="ADD" /></td>       
+                    <td><input type="submit" class="btn" name = "add_but" value="ADD" /></td>       
                     <input type="hidden" name="error" value="" />          
                 </tr>
             </table>
         </form> 
                 <br>
         <form action="#" method=post>
-			<input type="submit" name="delete" value="Delete"/>
+			<input type="submit" class="btn" name="delete" value="Delete"/>
 				<%
 					String curdb = (String)session.getAttribute("curdb");
 				
@@ -89,7 +89,7 @@
 		                     <tr>
 		    			<td><input type="checkbox" name="selected" value='<%= rs.getString("domain_name") %>'/></td>
 			    		<td><input type="text" disabled="true" id="<%=rs.getString("domain_name")%>" value="<%=rs.getString("domain_name")%>"/></td>
-			    		<td><input type="button" onclick="fun1(this,'<%=rs.getString("domain_name")%>')" value="EDIT"/></td>
+			    		<td><input type="button" class="btn" onclick="fun1(this,'<%=rs.getString("domain_name")%>')" value="EDIT"/></td>
 			    	</tr>
 		                     
 		                     <%}%>

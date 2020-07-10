@@ -12,7 +12,7 @@
 	String driver = "com.mysql.jdbc.Driver";
 	String connectionUrl = "jdbc:mysql://localhost:3306/";
 	String database = (String)session.getAttribute("curdb");
-	System.out.println("in add ques : "+database);
+	//System.out.println("in add ques : "+database);
 	String userid = "Deva";
 	String password = "dev123456";
 	
@@ -52,11 +52,15 @@
 				 alert('Please Select The File To Upload Teachers Data');
 				 return false;
 			 }
-			 
+			document.getElementById("add1").disabled = true;
+			document.getElementById("add2").disabled = true;
+			document.getElementById("del").disabled = true;
+			
 			return true;
 		}
 </script>
 <%@ include file = "navbar.jsp" %>
+	<center>
 	<p style="color:#0000FF"><%= status %></p>
 	<form method="post" action="/1st_increment_feedback/Main Scripts/addquestion.jsp" id="myform">
 		<h1>Add Questions</h1>
@@ -83,6 +87,10 @@
 		
       	</select>
      </form>
+     <p> Currently selected template - <b><%= temp_name %></b></p>
+		
+     </center>
+     <br><br>
      <% 
      	if(request.getParameter("select_temp") != null)
      		temp_name = request.getParameter("select_temp");
@@ -90,21 +98,9 @@
 	    		connection = DriverManager.getConnection(connectionUrl+database, userid, password);
 	    		statement=connection.createStatement();		
 	 %>
-	 
-	 
-
-	<form action="que_upload.jsp" enctype="multipart/form-data" method="POST">
-		<%
-			session.setAttribute("tempID", temp_name);
-		%>
-		<input name="upload" id="file" type="file" accept=".xls, .xlsx">
-		<br><br>
-		<input type="submit" value="ADD" onclick="return check()">
-	</form>
-	
-	 
+	<div class="row">
+	<div class="col">	
      <form action="processques.jsp" method="post">
-		<p> Currently selected template - <b><%= temp_name %></b></p>
 		<label>Enter the Question</label>
 		<input name="question" type="text" /><br>
 		<label>Option 1 (50 marks)</label>
@@ -118,10 +114,28 @@
 		<label>Option 5 (10 marks)</label>
 		<input name="option4" type="text" /><br>
 		<input type="hidden" name="temp_name" value="<%= temp_name %>">  
-		<input type="submit" name="single" value="Add Question"/> 
+		<input type="submit" class="btn" id="add1" name="single" value="Add Question"/> 
 	</form>
+	</div>
+	<div class="col">
+			 
+	 
+	<h3>Choose Excel Sheet</h3>
+	<br>
+	<form action="que_upload.jsp" enctype="multipart/form-data" method="POST">
+		<%
+			session.setAttribute("tempID", temp_name);
+		%>
+		<input name="upload" id="file" class="form-control" type="file" accept=".xls, .xlsx">
+		<br><br>
+		<input type="submit" class="btn" id="add2" value="ADD" onclick="return check()">
+	</form>
+	
+	 
+	</div>
+	</div>
     <form action="#" method=post>
-	<input type="submit" name="delete" value="Delete"/>
+	<input type="submit" class="btn" id="del" name="delete" value="Delete"/>
 		<%
 			if (request.getParameter("delete") != null) {
 				sammdao obj = new sammdao();
@@ -159,7 +173,7 @@
 		  		 <td><input style="width:80px;" type="text" disabled="true" id="<%=i+resultSet.getString("option3")%>" value="<%=resultSet.getString("option3")%>"/></td>
 		  		 <td><input style="width:80px;" type="text" disabled="true" id="<%=i+resultSet.getString("option4")%>" value="<%=resultSet.getString("option4")%>"/></td>
 		  		 <td><input style="width:80px;" type="text" disabled="true" id="<%=i+resultSet.getString("option5")%>" value="<%=resultSet.getString("option5")%>"/></td>
-		  		 <td><input style="width:80px;" type="button" onclick="fun1(this,'<%=i+resultSet.getString("qid")%>','<%=i+resultSet.getString("question")%>','<%=i+resultSet.getString("option1")%>','<%=i+resultSet.getString("option2")%>','<%=i+resultSet.getString("option3")%>','<%=i+resultSet.getString("option4")%>')" value="EDIT"/></td>
+		  		 <td><input style="width:80px;" type="button" class="btn" onclick="fun1(this,'<%=i+resultSet.getString("qid")%>','<%=i+resultSet.getString("question")%>','<%=i+resultSet.getString("option1")%>','<%=i+resultSet.getString("option2")%>','<%=i+resultSet.getString("option3")%>','<%=i+resultSet.getString("option4")%>')" value="EDIT"/></td>
 		  	 </tr>
 			<%
 			i++;

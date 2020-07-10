@@ -19,7 +19,7 @@
 </head>
 <body>
 	<%
-		String path = "/home/neo/eclipse-workspace/1st_increment_feedback/WebContent/data";
+		String path = "data/";
 		MultipartRequest mr = new MultipartRequest(request, path);
 		//storing the path of the uploaded file
 
@@ -73,33 +73,42 @@
 					}
 
 					}
-					System.out.println("\nReached Mark 0");
+					//System.out.println("\nReached Mark 0");
 
 					//System.out.println(names[j]);
 					
-					System.out.println("\nReached Mark 2");
+					//System.out.println("\nReached Mark 2");
 						
 					String queryString = "INSERT INTO subject(subject_id,subject_name,dept_id,yr,domain_name) VALUES (?,?,?,?,?)";
 					pstatement = con.prepareStatement(queryString);
 					
-					System.out.println("\nReached Mark 1");
-					
 					pstatement.setInt(1, n);
+					
 					pstatement.setString(2, names[0]);
-					pstatement.setString(3, names[1]);
-					pstatement.setString(4, names[2]);
-					pstatement.setString(5, names[3]);
+					
+					pstatement.setString(3, names[2]);
+					
+					pstatement.setString(4, names[3]);
+					
+					
+					pstatement.setString(5, names[1]);
+					
+					
 					updateQuery = pstatement.executeUpdate();
 					
+					System.out.println("\nReached Mark 7");
 					
 			}
 			
 
 			if (f.delete()) {
-						response.sendRedirect("subject.jsp");
+				response.sendRedirect("subject.jsp");
 			}
+			response.sendRedirect("subject.jsp");
+			
 			
 		} catch (Exception e) {
+			System.out.println(e.getMessage());
 			response.sendRedirect("subject.jsp");
 		}
 	%>

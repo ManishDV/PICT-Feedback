@@ -113,7 +113,7 @@ ResultSet result = null;
                      
                  </tbody>
              </table>
-             <button>SUBMIT</button>
+             <button class="btn">SUBMIT</button>
          </form>
      <%
      		String ran1 = "select ran1 from class where year='BE' and division = " + div;

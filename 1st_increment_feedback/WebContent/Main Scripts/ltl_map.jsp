@@ -11,14 +11,8 @@ Statement st=conn.createStatement();
 Statement st2=conn.createStatement(); 
 String year = request.getParameter("year");
 String div = request.getParameter("div");
-String error = "";
 
 int size = 0;
-
-if(request.getParameter("error") != null){
-	if(!request.getParameter("error").isEmpty())
-		error = request.getParameter("error");
-}
 
 if(request.getParameter("size") != null){
 	if(!request.getParameter("size").isEmpty())
@@ -72,7 +66,7 @@ ResultSet result = null;
 
 		<label>Size of batch : </label>
 		<input type="text" name="size"/>
-		<input type="submit" value="make batches"/>
+		<input type="submit" class="btn" value="make batches"/>
        </form>
 
        <h3>MAPPING</h3>
@@ -132,15 +126,7 @@ ResultSet result = null;
                      
         </tbody>
     </table>
-    <button>SUBMIT</button>
-    
-    <%
-    	if(error != ""){
-    		%>
-    		<p style="color:red"><%= error%><p>
-    		<%
-    	}
-    %>
+    <button class="btn">SUBMIT</button>
 </form>
     <%@ include file = "downbar.jsp" %>
 <script>
