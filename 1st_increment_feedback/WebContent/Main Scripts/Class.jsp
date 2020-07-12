@@ -72,7 +72,13 @@ try
 {
 	if((year !="") && (division !=null) && (dept !="") && ((Integer.parseInt(range1))<(Integer.parseInt(range2))) && (s!=null))
 	{
+		//trigger1
 		st1.executeUpdate("insert into class values('"+year+"',"+division+",'"+dept+"',"+range1+","+range2+")");
+		
+		for(int v=Integer.parseInt(range1); v<=Integer.parseInt(range2); v++){
+			st1.executeUpdate("insert into student(rollno, year, division) values("+v+",'"+year+"',"+division+")"); 	
+		}
+		
 		out.println("CLASS ADDED");
 		%>
 	    <p style="color:#0000FF"><%out.println("CLASS ADDED");%></p>
@@ -81,7 +87,11 @@ try
 	
 	else if((year!="")&&(division!=null)&&(dept!="")&&(range1!=null)&&(d!=null))
 	{
+		//trigger 2
 		st2.executeUpdate("delete from class where division="+division+";");
+		//for(int v=Integer.parseInt(range1); v<=Integer.parseInt(range2); v++){
+		st2.executeUpdate("delete from student where year='"+year+"' and division="+division+";"); 	
+		//}
 		out.println("CLASS DELETED");
 	}
 	
@@ -89,7 +99,7 @@ try
 catch(SQLException e)
 {
 	%>
-    <p style="color:#FF0000"><%out.print("INVALID INPUT!");%></p>
+    <p style="color:#FF0000"><%out.print("INVALID INPUT! "+e.getMessage());%></p>
     <%	          
 }
 

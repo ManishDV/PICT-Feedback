@@ -52,8 +52,8 @@ try{
     System.out.print("Executing initfeed\n");
     int result = -1;
     result = st.executeUpdate(q1);
-    result = st.executeUpdate(q1);
-    result = st.executeUpdate(q1);
+    result = st.executeUpdate(q2);
+    result = st.executeUpdate(q3);
     System.out.print("Initfeed executed successfully\n");
     
     String Capital_chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"; 

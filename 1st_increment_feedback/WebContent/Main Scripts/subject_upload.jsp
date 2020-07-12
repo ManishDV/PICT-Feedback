@@ -20,7 +20,7 @@
 <body>
 	<%
 		System.out.print("In sub upload \n");
-		String path = "data/";
+		String path = "/data/";
 		MultipartRequest mr = new MultipartRequest(request, path);
 		//storing the path of the uploaded file
 
