@@ -19,7 +19,15 @@
 </head>
 <body>
 	<%
-		String path = "data/";
+		//String path = "data/";
+		String path = "/tmp/data";
+		File path_file = new File(path);
+		
+		if(!path_file.exists()){
+			if(path_file.mkdirs())
+				System.out.println("File created");
+		}
+	
 		MultipartRequest mr = new MultipartRequest(request, path);
 		//storing the path of the uploaded file
 		System.out.println("In upload");
@@ -107,7 +115,7 @@
 			}
 
 			session.setAttribute("tempID",temp_name);
-			response.sendRedirect("addquestion.jsp");
+			//response.sendRedirect("addquestion.jsp");
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
 			response.sendRedirect("addquestion.jsp");

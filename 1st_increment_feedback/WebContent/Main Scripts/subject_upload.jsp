@@ -20,8 +20,16 @@
 <body>
 	<%
 		System.out.print("In sub upload \n");
-		String path = "/data/";
-		MultipartRequest mr = new MultipartRequest(request, path);
+		//String path = "/home/aniket/PICT-Feedback/1st_increment_feedback/WebContent/Main Scripts/data/";
+		String path = "/tmp/data";
+		File path_file = new File(path);
+		
+		if(!path_file.exists()){
+			if(path_file.mkdirs())
+				System.out.println("File created");
+		}
+		
+		MultipartRequest mr = new MultipartRequest(request,path);
 		//storing the path of the uploaded file
 
 		String filepath = mr.getFile("upload").toString();
@@ -105,7 +113,7 @@
 			if (f.delete()) {
 				response.sendRedirect("subject.jsp");
 			}
-			response.sendRedirect("subject.jsp");
+			//response.sendRedirect("subject.jsp");
 			
 			
 		} catch (Exception e) {

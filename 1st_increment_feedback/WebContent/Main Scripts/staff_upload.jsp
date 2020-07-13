@@ -20,7 +20,15 @@
 <body>
 	<%
 		//System.out.println("Request In Staff_Upload");
-		String path = "data/";
+		//String path = "data/";
+		String path = "/tmp/data";
+		File path_file = new File(path);
+		
+		if(!path_file.exists()){
+			if(path_file.mkdirs())
+				System.out.println("File created");
+		}
+		
 		MultipartRequest mr = new MultipartRequest(request, path);
 		//storing the path of the uploaded file
 
@@ -104,7 +112,7 @@
 			}
 			//session.setAttribute("error", errorString);
 			System.out.println(errorString);
-			response.sendRedirect("Teachers.jsp");
+			//response.sendRedirect("Teachers.jsp");
 			
 			
 		} catch (Exception e) {
