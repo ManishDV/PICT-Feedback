@@ -181,9 +181,18 @@ try{
 <%
 		if(request.getParameter("delete")!=null)
 		{
-			sammdao obj=new sammdao();
-			String[] arr=(String[])request.getParameterValues("selected");
-			obj.tcsdel(arr, database);
+				connection = DriverManager.getConnection(connectionUrl+database, userid, password);
+			    statement=connection.createStatement();
+				try{
+					sammdao obj=new sammdao();
+					String[] arr=(String[])request.getParameterValues("selected");
+					String [] arrOfStr = arr[0].split("#",4);
+					statement.executeUpdate("delete from student_cat where tid=(select tid from teachers where name='" + arrOfStr[0] +"') and sid = (select sid from subject where subject_name='" + arrOfStr[1] +"') and rollno in (select rollno from student where division="+arrOfStr[3]+" and year='"+ arrOfStr[2] +"');");
+					obj.tcsdel(arr, database);
+				}
+				catch(Exception e){
+					
+				}
 		}
 
 %>
