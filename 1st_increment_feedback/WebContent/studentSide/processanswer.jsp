@@ -11,7 +11,7 @@
 String id = request.getParameter("userid");
 String driver = "com.mysql.jdbc.Driver";
 String connectionUrl = "jdbc:mysql://localhost:3306/";
-String database = "feedback_main";
+String database = (String)session.getAttribute("database");
 String userid = "Deva";
 String password = "dev123456";
 
