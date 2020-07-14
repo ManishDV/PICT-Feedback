@@ -83,12 +83,14 @@ try{
 <select name="select_teacher" >
 <%
 try{
-    connection = DriverManager.getConnection(connectionUrl+database, userid, password);
-    statement=connection.createStatement();
-    String sql = "select id,name from teachers where dept=(select dept from class where year='"+year+"'and division='"+div+"')";
+	Connection con = null;
+    con = DriverManager.getConnection(connectionUrl+database, userid, password);
+    Statement stmt=con.createStatement();
+    //String sql = "select id,name from teachers where dept=(select dept from class where year='"+year+"' and division="+div+");";
+    String sql = "select id,name from teachers where dept = (select dept from class where year='"+year+"' and division = "+div+");";
     System.out.println(year+" "+div);
 
-    resultSet = statement.executeQuery(sql);
+    resultSet = stmt.executeQuery(sql);
     while(resultSet.next()){
     String t_name = teacher =resultSet.getString("name");
 %>
@@ -97,7 +99,8 @@ try{
   }
     connection.close();
     }catch (Exception e) {
-    e.printStackTrace();
+    	System.out.println(e.getMessage());
+    //e.printStackTrace();
     }
 %>
 
@@ -109,7 +112,7 @@ try{
 try{
     connection = DriverManager.getConnection(connectionUrl+database, userid, password);
     statement=connection.createStatement();
-    String sql = "select subject_id,subject_name from subject where dept_id=(select dept from class where year='"+year+"'and division='"+div+"') and yr='"+year+"'";
+    String sql = "select subject_id,subject_name from subject where dept_id=(select dept from class where year='"+year+"' and division="+div+") and yr='"+year+"';";
 
     resultSet = statement.executeQuery(sql);
     while(resultSet.next()){
@@ -136,20 +139,20 @@ try{
     String year1=request.getParameter("select_year"),div1=request.getParameter("select_div"),tid=request.getParameter("select_teacher"),sid=request.getParameter("select_subject");
     if(s!=null)
     {
-        sql = "insert into teacher_class_subject values(null,'"+tid+"','"+year1+"','"+div1+"','"+sid+"')";
-        statement.executeUpdate(sql);
-        sql="select ran1,ran2 from class where year='"+year1+"' and divisio	n="+div1+""; 
+       	sql="select ran1,ran2 from class where year='"+year1+"' and division="+div1+";"; 
         resultSet = statement.executeQuery(sql);
-        while(resultSet.next()){
-        String ran1 = subject =resultSet.getString("ran1");
-        String ran2 = subject =resultSet.getString("ran2");
-        System.out.println(ran1);
-        for(int v=Integer.parseInt(ran1); v<=Integer.parseInt(ran2); v++){
-			statement.executeUpdate("insert into studcheck(rollno,year,division,sid) values("+v+",'"+year1+"',"+div1+","+sid+");"); 	
+        resultSet.next();	
+       	String ran1 = resultSet.getString("ran1");
+      	  	String ran2 = resultSet.getString("ran2");
+      	  	System.out.println("IDHAR ARA HAI");
+     	  	for(int v=Integer.parseInt(ran1); v<=Integer.parseInt(ran2); v++){
+     	  		statement.executeUpdate("insert into studcheck(rollno,year,division,sid) values("+v+",'"+year1+"',"+div1+","+sid+");"); 	
 		}
-        }
-        
-	    String checkQuery = "select * from teacher_class_subject where tid ='"+tid+"' and cid_year='"+year1+"' and cid_div='"+div1+"' and sid = '"+sid+"';";
+      	System.out.println("For ke bahar aya");
+    	  	  	
+        System.out.println("Done With Sameer Section");
+  	  	
+	    String checkQuery = "select * from teacher_class_subject where cid_year='"+year1+"' and cid_div="+div1+" and sid = "+sid+";";
     	Statement stCheck = connection.createStatement();
     	ResultSet rs = stCheck.executeQuery(checkQuery);
     	
