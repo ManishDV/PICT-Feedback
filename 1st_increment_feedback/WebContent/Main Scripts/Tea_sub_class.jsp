@@ -138,6 +138,21 @@ try{
     {
         sql = "insert into teacher_class_subject values(null,'"+tid+"','"+year1+"','"+div1+"','"+sid+"')";
         statement.executeUpdate(sql);
+        sql="select ran1,ran2 from class where year='"+year1+"' and divisio	n="+div1+""; 
+        resultSet = statement.executeQuery(sql);
+        while(resultSet.next()){
+        String ran1 = subject =resultSet.getString("ran1");
+        String ran2 = subject =resultSet.getString("ran2");
+        System.out.println(ran1);
+        for(int v=Integer.parseInt(ran1); v<=Integer.parseInt(ran2); v++){
+			statement.executeUpdate("insert into studcheck(rollno,year,division,sid) values("+v+",'"+year1+"',"+div1+","+sid+");"); 	
+		}
+        }
+        
+        
+        		 
+        		 
+        		 
         %>
 	    <p style="color:#0000FF"><%out.println("MAPPING ADDED");%></p>
 	    <% 	
