@@ -249,7 +249,7 @@
     <!-- ////////////////////////////////////////////////////////////////////////////-->
 
 
-    <div class="main-menu menu-fixed menu-light menu-accordion    menu-shadow " data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
+     <div class="main-menu menu-fixed menu-light menu-accordion  menu-shadow " style="width:40%;" data-scroll-to-active="true" data-img="theme-assets/images/backgrounds/02.jpg">
         <div class="navbar-header">
             <ul class="nav navbar-nav flex-row">
                 <li class="nav-item mr-auto">
@@ -292,12 +292,12 @@
 									    			if(rs.getInt("fc")==1)
 									    			{
 												%>
-												<li class="nav-item"><a style="color: currentColor; cursor: not-allowed; opacity: 0.5;text-decoration: none;"><i class="ft-home"></i><span class="menu-title" data-i18n=""><%=name %>_<%=sub %></span></a></li>
+												<li class="nav-item"><a style="color: currentColor; cursor: not-allowed; opacity: 0.5;text-decoration: none;"><%=name %>_<%=sub %></a></li>
 													<%
 									    			}
 													else
 													{
-													%><li class="nav-item"><a href="index.jsp?name=<%=tid%>&sub=<%=subid%>&flag=1&tname=<%=name %>&sname=<%=sub %>&uname=<%=rollno %>" ><i class="ft-home"></i><span class="menu-title" data-i18n=""><%=name %>_<%=sub %></span></a></li>
+													%><li class="nav-item"><a href="index.jsp?name=<%=tid%>&sub=<%=subid%>&flag=1&tname=<%=name %>&sname=<%=sub %>&uname=<%=rollno %>" ><%=name %>_<%=sub %></a></li>
 												<%}
 						   						}
 						   					}
@@ -318,14 +318,14 @@
 				
 									    				%>
 							
-														<li class="nav-item"><a style="color: currentColor; cursor: not-allowed; opacity: 0.5;text-decoration: none;"  ><i class="ft-home"></i><span class="menu-title" data-i18n=""><%=name %>_<%=sub %></span></a></li>
+														<li class="nav-item"><a style="color: currentColor; cursor: not-allowed; opacity: 0.5;text-decoration: none;"  ><%=name %>_<%=sub %></a></li>
 														<%
 									    			}
 									    			else
 									    			{
 									    				%>
 														
-														<li class="nav-item"><a href="index.jsp?name=<%=tid%>&sub=<%=subid%>&flag=1&tname=<%=name %>&sname=<%=sub %>&uname=<%=rollno %>" ><i class="ft-home"></i><span class="menu-title" data-i18n=""><%=name %>_<%=sub %></span></a></li>
+														<li class="nav-item"><a href="index.jsp?name=<%=tid%>&sub=<%=subid%>&flag=1&tname=<%=name %>&sname=<%=sub %>&uname=<%=rollno %>" ><%=name %>_<%=sub %></a></li>
 														<%
 						    				
 									    			}
@@ -343,7 +343,7 @@
 			    			e.printStackTrace();
 			    		}
 				%>
-  
+  				<li class="nav-item"><a href="Login1.jsp"><i class="ft-bold"></i><span class="menu-title" data-i18n="">Logout</span></a></li>
             </ul>
 	       
         <div class="navigation-background"></div>
