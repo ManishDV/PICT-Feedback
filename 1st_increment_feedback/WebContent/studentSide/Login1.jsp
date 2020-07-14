@@ -1,43 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@page import="java.sql.*"%>
-<%@page import="java.util.*"%>
-<%
-	String uname = request.getParameter("uname");
-	String pass = request.getParameter("passwd");
-	String year = request.getParameter("select_year");
-	String curdb="feedback_main_"+year;
-	try{
-		Class.forName("com.mysql.jdbc.Driver");
-		
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+curdb,"Deva","dev123456");
-		
-		String query = "select rollno,pass from student where rollno="+uname;
-		Statement st = con.createStatement();
-		ResultSet resultSet = st.executeQuery(query);
-		
-		if(resultSet.next()){
-			System.out.println(resultSet.getString("rollno")+" 88888 "+resultSet.getString("pass"));
-			if(pass.equals(resultSet.getString("pass"))){
-				response.sendRedirect("index.jsp?uname="+uname+"&curdb="+curdb+"");
-				session.setAttribute("database", curdb);
-				 
-			}else{
-				session.setAttribute("error","Password or Username is Wrong");
-				response.sendRedirect("Login1.jsp");
-			}
-		}
-		else{
-			session.setAttribute("error","No user with user Name "+uname);
-			response.sendRedirect("Login1.jsp");
-		}
-		
+  pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*"%>
 
-		st.close();
-		resultSet.close();
-		con.close();
-	
-	}catch(Exception e){
-		e.printStackTrace();
-	}
-%>
+
+<html>
+
+<head>
+  <link rel="stylesheet" href="Login.css">
+  <link href="https://fonts.googleapis.com/css?family=Ubuntu" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+  <title>Student Evaluation System</title>
+  <script>
+    
+    var error = '<%=session.getAttribute("error")%>';
+
+    if(error.trim().length != 0){
+          alert(error);
+     <%
+        session.setAttribute("error"," ");
+        session.setAttribute("user","");
+     %> 
+   }
+
+
+  </script>
+</head>
+
+<body>
+  <div class="main">
+    <p class="sign" align="center">Sign in</p>
+    <form class="form1" action="login.jsp" method="post"> 
+      <input class="un " type="text" align="center" placeholder="Username" name="uname" autocomplete="off" required />
+      <input class="pass" type="password" align="center" placeholder="Password" name="passwd" autocomplete="off" required />
+      <select class="pass" name="select_year" id="select_year" align="center">
+					</select> 
+					<script>
+						(function() {
+						    var elm = document.getElementById('select_year'),
+						        df = document.createDocumentFragment();
+						    for (var i = (new Date().getFullYear())-10; i <= (new Date().getFullYear())+10; i++) {
+						    	for(var j=1;j<=2;j++){
+							        var option = document.createElement('option');
+							        option.value = i + "_" + (i+1)+"_sem"+j;
+							        option.appendChild(document.createTextNode(i+" _ "+(i+1)+"_sem"+j));
+							        df.appendChild(option);
+						    	}
+						    }
+						    elm.appendChild(df);
+						}());
+					</script>
+					<br>
+      <input type="submit" class="submit" value="Login"  />
+      </form>      
+                
+    </div>
+     
+</body>
+
+</html>
+
