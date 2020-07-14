@@ -266,8 +266,8 @@
 	
 	String query68 = "LOCK TABLES temp_ques WRITE;";
 	
-	//String query69 = "INSERT INTO temp_ques VALUES ('CTL',1),('CTL',2),('LTL',3),('LTL',4);";
-	
+	String queryF1 = "alter table studcheck add foreign key(rollno) references student(rollno);";
+	String queryF2= "alter table student_cat add foreign key(rollno) references student(rollno);";
 	String query70 = "UNLOCK TABLES;";
 	
 	String query71 = "DROP TABLE IF EXISTS template;";
@@ -452,6 +452,8 @@ if (request.getParameter("select_year") != null) {
 			//result3 = statement3.executeUpdate(query59);
 			result3 = statement3.executeUpdate(query60);
 			
+			result3 = statement3.executeUpdate(queryF1);
+			result3 = statement3.executeUpdate(queryF2);
 			result3 = statement3.executeUpdate(query66);
 			result3 = statement3.executeUpdate(query67);
 			result3 = statement3.executeUpdate(query68);
