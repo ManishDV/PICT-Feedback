@@ -149,13 +149,23 @@ try{
 		}
         }
         
-        
-        		 
-        		 
-        		 
-        %>
-	    <p style="color:#0000FF"><%out.println("MAPPING ADDED");%></p>
-	    <% 	
+	    String checkQuery = "select * from teacher_class_subject where tid ='"+tid+"' and cid_year='"+year1+"' and cid_div='"+div1+"' and sid = '"+sid+"';";
+    	Statement stCheck = connection.createStatement();
+    	ResultSet rs = stCheck.executeQuery(checkQuery);
+    	
+    	rs.next();
+    	int count = rs.getRow();
+    	if(count > 0){
+    		 %>
+    		    <p style="color:#0000FF"><%out.println("Already Mapped");%></p>
+    		 <% 	
+    	}else{
+    		 sql = "insert into teacher_class_subject values(null,'"+tid+"','"+year1+"','"+div1+"','"+sid+"')";
+   	        statement.executeUpdate(sql);
+   	        %>
+   		    <p style="color:#0000FF"><%out.println("MAPPING ADDED");%></p>
+   		    <%	
+    	}
     }
     connection.close();
     }catch (Exception e) {
