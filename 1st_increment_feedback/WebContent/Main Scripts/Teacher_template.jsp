@@ -99,7 +99,7 @@
 			try{
 		    		connection = DriverManager.getConnection(connectionUrl+database, userid, password);
 		    		statement=connection.createStatement();
-		    		String sql = "select tid,(select name from teachers where id=tid) as name,sid,(select subject_name from subject where subject_id=sid) as sname from teacher_class_subject where cid_year='"+ year_name + 
+		    		String sql = "select distinct(tid),(select name from teachers where id=tid) as name,sid,(select subject_name from subject where subject_id=sid) as sname from teacher_class_subject where cid_year='"+ year_name + 
 		    						"' and cid_div in (select division from class where dept = '" + dept_name + "' )";
 					
 		    		resultSet = statement.executeQuery(sql);
@@ -164,7 +164,7 @@
 	    	try{
 		    		connection = DriverManager.getConnection(connectionUrl+database, userid, password);
 		    		statement=connection.createStatement();
-		    		String sql = "select tid,(select name from teachers where id=tid) as name,sid,(select subject_name from subject where subject_id=sid) as sname,temp_id from teacher_subject_template";
+		    		String sql = "select distinct(tid),(select name from teachers where id=tid) as name,sid,(select subject_name from subject where subject_id=sid) as sname,temp_id from teacher_subject_template";
 
 		    		if(sql != null){
 						resultSet = statement.executeQuery(sql);
