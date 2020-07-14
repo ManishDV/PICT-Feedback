@@ -102,9 +102,6 @@ catch(SQLException e)
     <p style="color:#FF0000"><%out.print("INVALID INPUT! "+e.getMessage());%></p>
     <%	          
 }
-
-
-
 %>
 <br><br>
 <center>
@@ -167,7 +164,6 @@ while(rs2.next())
 var prev = []
 var oyear = null
 var odiv = null
-
 function fun1(el,el_id1,el_id2,el_id3,el_id4,el_id5){
 	if(el.value == "UPDATE"){
 		var year = document.getElementById(el_id1).value
@@ -201,7 +197,6 @@ function fun1(el,el_id1,el_id2,el_id3,el_id4,el_id5){
 		cur.push(document.getElementById(el_id3))
 		cur.push(document.getElementById(el_id4))
 		cur.push(document.getElementById(el_id5))
-
 		for(var i=0; i < cur.length; i++){
 			cur[i].disabled = false
 		}
