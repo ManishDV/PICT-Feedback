@@ -6,70 +6,34 @@
 	String uname = request.getParameter("uname");
 	String pass = request.getParameter("passwd");
 	String year = request.getParameter("select_year");
-	
-	System.out.println(year);
+	String curdb="feedback_main_"+year;
 	try{
 		Class.forName("com.mysql.jdbc.Driver");
 		
-		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/feedback_main","Deva","dev123456");
-		Connection con2 = DriverManager.getConnection("jdbc:mysql://localhost:3306/","Deva","dev123456");
-		Statement st2 = con2.createStatement();			
+		Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/"+curdb,"Deva","dev123456");
 		
-		String query = "select pass from accounts where name='"+uname+"'";
-		
+		String query = "select rollno,pass from student where rollno="+uname;
 		Statement st = con.createStatement();
 		ResultSet resultSet = st.executeQuery(query);
 		
-		int res = -1;
-		ResultSet rset = null;
-		String curdb = "";
-		
-		////
-		ResultSet rs2 = null;
-		Statement s2 = con2.createStatement();
-		////
-		if(resultSet.next())
-		{
-			if(pass.equals(resultSet.getString("pass")))
-			{
-				rs2 = s2.executeQuery("SHOW DATABASES like '%feedback_main_"+year+"'");
-				if(rs2 != null)
-				{
-					if(rs2.next())
-					{
-						res = st2.executeUpdate("USE feedback_main_"+year);					
-						System.out.println("Value of rs is : "+res);
-						if(res != -1)
-						{
-							rset = st2.executeQuery("Select database()");
-							while(rset.next())
-							{
-								curdb = rset.getString(1);
-								System.out.println("Database in use is " + curdb);
-							}
-							response.sendRedirect("/1st_increment_feedback/Main Scripts/ins.jsp?"+curdb);
-							session.setAttribute("curdb", curdb);
-							rset.close();
-						}
-					}
-					else
-					{
-						response.sendRedirect("Login.html?error= selected db does not exist");
-					}
-					rs2.close();
-				}
-				else
-					response.sendRedirect("Login.html?error= selected db does not exist");
+		if(resultSet.next()){
+			System.out.println(resultSet.getString("rollno")+" 88888 "+resultSet.getString("pass"));
+			if(pass.equals(resultSet.getString("pass"))){
+				response.sendRedirect("index.jsp?uname="+uname+"&curdb="+curdb+"");
+				session.setAttribute("database", curdb);
+				 
+			}else{
+				session.setAttribute("error","Password or Username is Wrong");
+				response.sendRedirect("Login1.jsp");
 			}
-			else
-				response.sendRedirect("Login.html?error=Password or Username is Wrong");
-			}	
-		else
-				response.sendRedirect("Login.html?error=No user with user Name");
-	
+		}
+		else{
+			session.setAttribute("error","No user with user Name "+uname);
+			response.sendRedirect("Login1.jsp");
+		}
 		
+
 		st.close();
-		st2.close();
 		resultSet.close();
 		con.close();
 	
