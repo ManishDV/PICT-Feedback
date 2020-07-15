@@ -144,15 +144,11 @@ try{
         resultSet.next();	
        	String ran1 = resultSet.getString("ran1");
       	  	String ran2 = resultSet.getString("ran2");
-      	  	System.out.println("IDHAR ARA HAI");
-     	  	for(int v=Integer.parseInt(ran1); v<=Integer.parseInt(ran2); v++){
+      	  	for(int v=Integer.parseInt(ran1); v<=Integer.parseInt(ran2); v++){
      	  		statement.executeUpdate("insert into studcheck(rollno,year,division,sid) values("+v+",'"+year1+"',"+div1+","+sid+");"); 	
 		}
-      	System.out.println("For ke bahar aya");
-    	  	  	
-        System.out.println("Done With Sameer Section");
   	  	
-	    String checkQuery = "select * from teacher_class_subject where cid_year='"+year1+"' and cid_div="+div1+" and sid = "+sid+";";
+	String checkQuery = "select * from teacher_class_subject where cid_year='"+year1+"' and cid_div="+div1+" and sid = "+sid+";";
     	Statement stCheck = connection.createStatement();
     	ResultSet rs = stCheck.executeQuery(checkQuery);
     	
